@@ -9,8 +9,12 @@ const elements = {
 
 const LOCAL_KEY = "feedback-form-state";
 
-elements.inputEmail.addEventListener('input', throttle(onEmail, 500));
-elements.message.addEventListener('input', throttle(onMessage, 500));
+elements.inputEmail.addEventListener('input', throttle(onEmail, 500, {
+      'trailing': false
+    }));
+elements.message.addEventListener('input', throttle(onMessage, 500, {
+      'trailing': false
+    }));
 elements.button.addEventListener('click', onClick);
 
 const localStorageValue = { email: "", message: "" }
