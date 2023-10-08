@@ -1,3 +1,5 @@
+import throttle from 'lodash.throttle';
+
 const elements = {
     inputEmail: document.querySelector('[name="email"]'),
     message: document.querySelector('[name="message"]'),
@@ -7,8 +9,8 @@ const elements = {
 
 const LOCAL_KEY = "feedback-form-state";
 
-elements.inputEmail.addEventListener('input', onEmail);
-elements.message.addEventListener('input', onMessage);
+elements.inputEmail.addEventListener('input', throttle(onEmail, 500));
+elements.message.addEventListener('input', throttle(onMessage, 500));
 elements.button.addEventListener('click', onClick);
 
 const localStorageValue = { email: "", message: "" }
@@ -16,9 +18,7 @@ const localStorageValue = { email: "", message: "" }
 if (localStorage.getItem(LOCAL_KEY)) {
     const values = JSON.parse(localStorage.getItem(LOCAL_KEY));
     elements.inputEmail.value = values.email;
-    elements.message.value = values.message; 
-
-    
+    elements.message.value = values.message;     
 }
 
 function onEmail(event) {
@@ -28,7 +28,7 @@ function onEmail(event) {
 
 function onMessage(event) {
     localStorageValue.message = event.currentTarget.value;
-    localStorage.setItem(LOCAL_KEY, JSON.stringify(localStorageValue))    
+    localStorage.setItem(LOCAL_KEY, JSON.stringify(localStorageValue))
 }
 
 function onClick(event) {
