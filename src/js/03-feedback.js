@@ -39,6 +39,8 @@ function onSubmit(event) {
     elements.form.reset();
 }
 
+
+
 // Неправильний варіант
 // const elements = {
 //     inputEmail: document.querySelector('[name="email"]'),
